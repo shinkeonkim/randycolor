@@ -1,0 +1,64 @@
+{
+  "name": "randycolor",
+  "version": "1.0.0",
+  "description": "Random gradient color generator app",
+  "main": "dist-electron/main.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc --noEmit && vite build && electron-builder",
+    "preview": "vite preview",
+    "electron:dev": "vite --config vite.config.ts",
+    "electron:build": "vite build && electron-builder"
+  },
+  "keywords": [
+    "color",
+    "gradient",
+    "random",
+    "electron",
+    "vue"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "@vitejs/plugin-vue": "^5.0.0",
+    "electron": "^28.1.0",
+    "electron-builder": "^24.9.1",
+    "typescript": "~5.0.4",
+    "vite": "^5.0.10",
+    "vite-plugin-electron": "^0.15.5",
+    "vue-tsc": "^1.6.5"
+  },
+  "dependencies": {
+    "vue": "^3.3.13"
+  },
+  "build": {
+    "appId": "com.randycolor.app",
+    "productName": "RandyColor",
+    "directories": {
+      "output": "dist_electron"
+    },
+    "files": [
+      "dist/**/*",
+      "dist-electron/**/*"
+    ],
+    "mac": {
+      "category": "public.app-category.graphics-design",
+      "icon": "public/logo.ico"
+    },
+    "win": {
+      "target": [
+        "nsis"
+      ],
+      "icon": "public/logo.ico"
+    },
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb"
+      ],
+      "category": "Graphics",
+      "icon": "public/logo.ico"
+    }
+  }
+}
