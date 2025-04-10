@@ -8,8 +8,24 @@
     <meta name="theme-color" content="#0f1424" />
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <link rel="icon" href="/logo.svg" type="image/svg+xml" />
-    <link rel="icon" href="/logo.png" type="image/png" />
+    <link rel="icon" href="/randycolor/logo.svg" type="image/svg+xml" />
+    <link rel="icon" href="/randycolor/logo.png" type="image/png" />
+    
+    <!-- GitHub Pages SPA 지원을 위한 리디렉션 스크립트 -->
+    <script type="text/javascript">
+      // GitHub Pages에서 Single Page App 지원을 위한 스크립트
+      // 참고: https://github.com/rafgraph/spa-github-pages
+      (function(l) {
+        if (l.search[1] === '/' ) {
+          var decoded = l.search.slice(1).split('&').map(function(s) { 
+            return s.replace(/~and~/g, '&')
+          }).join('?');
+          window.history.replaceState(null, null,
+              l.pathname.slice(0, -1) + decoded + l.hash
+          );
+        }
+      }(window.location))
+    </script>
   </head>
   <body>
     <div id="app"></div>

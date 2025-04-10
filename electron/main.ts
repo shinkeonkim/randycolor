@@ -25,7 +25,7 @@ async function createWindow() {
     transparent: false,
     backgroundColor: '#1a1a1a', // 불투명 배경색으로 변경
     // 앱 아이콘 설정
-    icon: join(isDevelopment ? process.cwd() : app.getAppPath(), 'public', 'logo.png')
+    icon: join(isDevelopment ? process.cwd() : app.getAppPath(), 'public', 'logo.ico')
   })
 
   // 앱 로드

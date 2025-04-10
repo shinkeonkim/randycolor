@@ -14,3 +14,6 @@ contextBridge.exposeInMainWorld('electronAPI', {
   // 플랫폼 정보
   getPlatform: () => process.platform,
 })
+
+// Electron 환경임을 나타내는 플래그 설정
+contextBridge.exposeInMainWorld('isElectron', true)

@@ -55,6 +55,10 @@ Electron과 Vue.js를 이용하여 개발되었으며, 데스크탑 앱으로 �
    - **Windows**: `.exe` 파일을 실행하고 설치 과정을 따르세요.
    - **Linux**: `.AppImage` 파일을 실행하거나 `.deb` 패키지를 설치하세요.
 
+### 웹 버전 사용
+
+브라우저에서 [https://shinkeonkim.github.io/randycolor](https://shinkeonkim.github.io/randycolor)에 접속하여 바로 사용할 수 있습니다.
+
 ## 사용법
 
 1. **색상 생성하기**
@@ -90,7 +94,7 @@ Electron과 Vue.js를 이용하여 개발되었으며, 데스크탑 앱으로 �
 
 ```bash
 # 저장소 클론
-git clone https://github.com/yourusername/randycolor.git
+git clone https://github.com/shinkeonkim/randycolor.git
 cd randycolor
 
 # 의존성 설치

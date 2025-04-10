@@ -1,6 +1,6 @@
 <template>
-  <div class="app-container">
-    <header class="app-header">
+  <div class="app-container" :class="{ 'web-env': isWebEnv }">
+    <header class="app-header" :class="{ 'is-mobile': isMobile }">
       <div class="logo-container">
         <img src="/logo.svg" alt="RandyColor Logo" class="app-logo" />
       </div>
@@ -8,9 +8,16 @@
         <h1>RandyColor</h1>
         <p>랜덤 그라데이션 CSS 생성기</p>
       </div>
+      
+      <!-- 웹 환경에서만 보이는 GitHub 링크 -->
+      <a v-if="isWebEnv" href="https://github.com/shinkeonkim/randycolor" target="_blank" class="github-link">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+        </svg>
+      </a>
     </header>
     
-    <main class="app-content">
+    <main class="app-content" :class="{ 'is-mobile': isMobile }">
       <div class="gradient-preview-section">
         <GradientCanvas 
           :gradient-css="gradientCss" 
@@ -54,7 +61,10 @@
     </main>
     
     <footer class="app-footer">
-      <p>Made with Vue.js and Electron</p>
+      <p>Made with Vue.js {{ isWebEnv ? 'for Web' : 'and Electron' }}</p>
+      <p v-if="isWebEnv" class="web-note">
+        이 웹 버전은 <a href="https://github.com/shinkeonkim/randycolor" target="_blank">GitHub</a>에서 데스크탑 버전도 다운로드 가능합니다.
+      </p>
     </footer>
   </div>
 </template>
@@ -68,6 +78,7 @@ import CodeDisplay from '@/components/CodeDisplay.vue';
 import GradientPreview from '@/components/GradientPreview.vue';
 import useColors from '@/composables/useColors';
 import useGradient from '@/composables/useGradient';
+import useWebEnvironment from '@/composables/useWebEnvironment';
 import { ColorFormat, GradientType, GradientDirection } from '@/types';
 
 export default defineComponent({
@@ -82,6 +93,9 @@ export default defineComponent({
   },
   
   setup() {
+    // 웹 환경 감지
+    const { isWebEnv, isDarkMode, isMobile } = useWebEnvironment();
+    
     // 색상 관리
     const {
       colors,
@@ -177,6 +191,9 @@ export default defineComponent({
       updateGradientDirection,
       updateColorFormat,
       resetGradient,
+      isWebEnv,
+      isDarkMode,
+      isMobile
     };
   },
 });
@@ -223,6 +240,24 @@ body {
   /* 앱 헤더를 윈도우 드래그 영역으로 만들기 */
   -webkit-app-region: drag;
   user-select: none;
+  position: relative;
+}
+
+.app-header.is-mobile {
+  flex-direction: column;
+}
+
+.github-link {
+  position: absolute;
+  right: 10px;
+  top: 20px;
+  color: var(--text-secondary);
+  transition: color 0.3s;
+  -webkit-app-region: no-drag;
+}
+
+.github-link:hover {
+  color: var(--text-primary);
 }
 
 .logo-container {
@@ -261,6 +296,10 @@ body {
   flex-grow: 1;
 }
 
+.app-content.is-mobile {
+  grid-template-columns: 1fr;
+}
+
 .gradient-preview-section {
   display: flex;
   flex-direction: column;
@@ -280,11 +319,30 @@ body {
   font-size: 0.9rem;
 }
 
+.web-note {
+  margin-top: 5px;
+  font-size: 0.8rem;
+}
+
+.web-note a {
+  color: #ff7e5f;
+  text-decoration: none;
+}
+
+.web-note a:hover {
+  text-decoration: underline;
+}
+
 .debug-info {
   margin-top: 5px;
   font-size: 0.8rem;
   opacity: 0.7;
   word-break: break-all;
+}
+
+/* 웹 환경일 때 앱 드래그 영역 비활성화 */
+.web-env .app-header {
+  -webkit-app-region: none;
 }
 
 /* 상호작용 요소들은 드래그 영역에서 제외 */
