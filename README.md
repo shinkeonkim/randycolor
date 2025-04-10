@@ -1,5 +1,3 @@
-# RandyColor
-
 <div align="center">
   <!-- 로고 이미지 공간 -->
   <img src="./full_logo.svg" alt="RandyColor Logo" width="400"/>
