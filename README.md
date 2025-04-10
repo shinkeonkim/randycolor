@@ -138,6 +138,6 @@ yarn electron:build
 
 질문이나 피드백이 있으시면 [이슈 트래커](https://github.com/shinkeonkim/randycolor/issues)에 등록해 주세요.
 
-## 기타 사항
+## 기타
 
 - 해당 App 코드의 90% 이상은 Claude3.7 Sonnet으로 작성되었습니다.
